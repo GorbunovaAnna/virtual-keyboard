@@ -156,7 +156,7 @@ const keysArray = [
       },
       {
         valueRu: '\\',
-        valueEng: '/',
+        valueEng: '\\',
         keyCode: 'Backslash',
       },
       {
@@ -281,7 +281,7 @@ const keysArray = [
         keyCode: 'Slash',
       },
       {
-        value: 'ArrowUp',
+        value: '▲',
         keyCode: 'ArrowUp',
       },
       {
@@ -309,15 +309,15 @@ const keysArray = [
         keyCode: 'AltRight',
       },
       {
-        value: 'ArrowLeft',
+        value: '◄',
         keyCode: 'ArrowLeft',
       },
       {
-        value: 'ArrowDown',
+        value: '▼',
         keyCode: 'ArrowDown',
       },
       {
-        value: 'ArrowRight',
+        value: '►',
         keyCode: 'ArrowRight',
       },
       {
@@ -325,5 +325,50 @@ const keysArray = [
         keyCode: 'ControlRight',
       },
     ];
+
+    let currentLanguage = 'eng';
+    let currentRegister = 'lowerCase'; // upperCase
+
+    function drawKeys() {
+        keysArray.map(el => {
+            createKey(el);
+        })
+    }
+    drawKeys();
+    function createKey(key) {
+        const keyElement = document.createElement('div');
+        if(currentLanguage === 'eng') {
+            keyElement.innerHTML = key.valueEng || key.value;
+        } else if(currentLanguage === 'ru') {
+            keyElement.innerHTML = key.valueRu || key.value;
+        } 
+
+        if(key.keyCode === 'ArrowUp' ||
+            key.keyCode === 'ArrowLeft' ||
+            key.keyCode === 'ArrowDown' ||
+            key.keyCode === 'ArrowRight'
+        ) {
+            const keyImgElement = document.createElement('img');
+            keyElement.append(keyImgElement);
+            
+        }
+
+        keyElement.className = "key";
+
+        if(key.keyCode === 'ShiftRight' || 
+            key.keyCode === 'ShiftLeft' || 
+            key.keyCode === 'Enter' || 
+            key.keyCode === 'CapsLock' || 
+            key.keyCode === 'Backspace') {
+            keyElement.classList.add('big');
+        } else if(key.keyCode === 'Space') {
+            keyElement.classList.add('super');
+        } else {
+            
+        }
+        keyboardElement.append(keyElement);
+    }
+
+
     
     
