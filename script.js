@@ -430,7 +430,7 @@ function writeCharacter(e) {
     case 'Tab':
       textareaElement.value = `${curText.substring(0, selectionStart)}\t${curText.substring(selectionEnd)}`;
       break;
-
+    case 'MetaLeft':
     case 'AltLeft':
     case 'AltRight':
     case 'ControlLeft':
@@ -462,7 +462,6 @@ function writeCharacter(e) {
     default:
       textareaElement.value += e.target.innerText;
   }
-  // keyElement.classList.add('active');
 }
 
 keyboardElement.addEventListener('click', (e) => writeCharacter(e));

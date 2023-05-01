@@ -59,7 +59,6 @@ body {
 .active {
     background-color: #f7e91ed8;
     border-radius: 50%;
-    /* transition: all 1s; */
 }
 .big {
     flex-grow: 2;
