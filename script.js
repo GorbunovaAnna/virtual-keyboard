@@ -440,9 +440,6 @@ function writeCharacter(e) {
       + curText.substring(selectionEnd);
       break;
 
-      // case 'Delete':
-      //   textareaElement.value = curText.
-
     case 'Space':
       textareaElement.value = `${curText.substring(0, selectionStart)} ${curText.substring(selectionEnd)}`;
       break;

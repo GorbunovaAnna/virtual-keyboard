@@ -8,7 +8,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .wrapper {
-    /* max-width: 60%; */
     margin: 0 auto;
     padding: 40px 0;
     display: flex;
@@ -30,12 +29,8 @@ body {
     gap: 10px;
     flex-wrap: wrap;
     border-radius: 5px;
-    /* border: 1px solid red; */
     margin-bottom: 30px;
     background-color: #46344E ;
-}
-.info {
-
 }
 .key {
     width: 40px;
