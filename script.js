@@ -326,14 +326,14 @@ const keysArray = [
   },
 ];
 
-const currentLanguage = 'eng';
-let currentRegister = 'lowerCase'; // upperCase
+let currentLanguage = 'en';
+let currentRegister = 'lowerCase';
 let keyElement;
 
 function createKey(key) {
   keyElement = document.createElement('div');
   keyElement.setAttribute('id', key.keyCode);
-  if (currentLanguage === 'eng') {
+  if (currentLanguage === 'en') {
     keyElement.innerHTML = key.valueEng || key.value;
   } else if (currentLanguage === 'ru') {
     keyElement.innerHTML = key.valueRu || key.value;
@@ -380,6 +380,17 @@ function keysToLow() {
     }
   });
 }
+function changeLanguage() {
+  keysArray.forEach((item) => {
+    const key = document.getElementById(item.keyCode);
+
+    if (currentLanguage === 'en' && item.valueEng) {
+      key.textContent = item.valueEng;
+    } else if (currentLanguage === 'ru' && item.valueRu) {
+      key.textContent = item.valueRu;
+    }
+  });
+}
 
 function drawKeys() {
   keysArray.forEach((el) => {
@@ -406,11 +417,17 @@ function writeCharacter(e) {
       foundEl.classList.remove('active');
     }, 100);
   } else if (e.type === 'keydown') {
+    if (e.target.innerText.length > 10) {
+      return;
+    }
     const foundEl = document.getElementById(e.code);
     foundEl.classList.add('active');
-    setTimeout(() => {
-      foundEl.classList.remove('active');
-    }, 100);
+  }
+
+  if (document.getElementById('ControlLeft').classList.contains('active')
+    && document.getElementById('AltLeft').classList.contains('active')) {
+    currentLanguage = currentLanguage === 'en' ? 'ru' : 'en';
+    changeLanguage();
   }
 
   switch (keyCode) {
@@ -422,6 +439,9 @@ function writeCharacter(e) {
       textareaElement.value = curText.substring(0, selectionEnd - 1)
       + curText.substring(selectionEnd);
       break;
+
+      // case 'Delete':
+      //   textareaElement.value = curText.
 
     case 'Space':
       textareaElement.value = `${curText.substring(0, selectionStart)} ${curText.substring(selectionEnd)}`;
@@ -464,5 +484,11 @@ function writeCharacter(e) {
   }
 }
 
+function removeActive(e) {
+  const foundEl = document.getElementById(e.code);
+  foundEl.classList.remove('active');
+}
+
 keyboardElement.addEventListener('click', (e) => writeCharacter(e));
 document.addEventListener('keydown', (e) => writeCharacter(e));
+document.addEventListener('keyup', (e) => removeActive(e));
