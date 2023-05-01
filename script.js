@@ -400,12 +400,17 @@ function writeCharacter(e) {
   }
   if (e.type === 'click') {
     keyCode = e.target.id;
+    const foundEl = document.getElementById(e.target.id);
+    foundEl.classList.add('active');
+    setTimeout(() => {
+      foundEl.classList.remove('active');
+    }, 100);
   } else if (e.type === 'keydown') {
     const foundEl = document.getElementById(e.code);
     foundEl.classList.add('active');
     setTimeout(() => {
       foundEl.classList.remove('active');
-    }, 70);
+    }, 100);
   }
 
   switch (keyCode) {
